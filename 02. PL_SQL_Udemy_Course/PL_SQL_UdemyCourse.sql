@@ -7,6 +7,7 @@ Oracle Live SQL: https://livesql.oracle.com/
 ******************************/
 
 
+
 /******************************
 	    Section 3
 ******************************/
@@ -20,6 +21,7 @@ DBMS_OUTPUT.PUT_LINE('Hello world!');
     DBMS_OUTPUT.PUT_LINE('PL/SQL');
     END;
 END;
+
 
 
 /******************************
@@ -64,5 +66,79 @@ BEGIN
     -- DBMS_OUTPUT.PUT_LINE(SYS.DIUTIL.BOOL_TO_INT(v_boolean1));
 END;
 
+-- %TYPE
 
--- 
+DESC hr.employees;
+
+DECLARE
+    v_type1 hr.employees.job_id%type;
+    v_type2 v_type1%type;
+    v_type3 hr.employees.job_id%type;
+BEGIN
+    v_type1 := 'IT_PROG';
+    v_type2 := 'SA_MAN';
+    v_type3 := NULL;
+    DBMS_OUTPUT.PUT_LINE(v_type1);
+    DBMS_OUTPUT.PUT_LINE(v_type2);
+    DBMS_OUTPUT.PUT_LINE(v_type3 || '...');
+END;
+
+
+-- Variable scope
+
+DECLARE
+    v_outer1 varchar2(50) := 'Outside nested statement';
+BEGIN
+
+    DECLARE
+        v_inner1 varchar2(50) := 'Inside nested statement';
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE(v_inner1);
+    END;
+
+    DBMS_OUTPUT.PUT_LINE(v_outer1);
+    -- this line will cause a error: DBMS_OUTPUT.PUT_LINE('v_inner1');
+END;
+
+
+-- Bind variables
+	--  Oracle live doesn't suport the VARIABLE statement...
+
+VARIABLE var_text VARCHAR2(50);
+VARIABLE var_number NUMBER;
+VARIABLE var_consulta NUMBER;
+
+DECLARE
+	v_text VARCHAR2(50	);
+BEGIN
+	:var_text := 'Testando';
+	:var_number := 42;
+	v_text := :var_text;
+	dbms_output.put_line(v_text);
+	dbms_output.put_line(:var_text);
+	:var_consulta := 100;
+END;
+SELECT * FROM hr.employees WHERE employee_id = :var_consulta;
+
+
+
+/******************************
+        Section 5 - Control Structures         
+******************************/
+
+DECLARE
+	v_inner NUMBER :=1;
+
+BEGIN
+    <<outer_l>>
+	FOR v_outer IN 1..5 LOOP
+		DBMS_OUTPUT.PUT_LINE('Outer loop: ' || v_outer);
+		v_inner := 1; --reset the inner counter
+		<<inner_l>>
+		WHILE v_inner * v_outer <= 15 LOOP
+			DBMS_OUTPUT.PUT_LINE('  Inner loop: ' || v_inner);
+			v_inner := 1 + v_inner;
+			exit inner_l when v_inner >10;
+		END LOOP;
+	END LOOP;
+END;
