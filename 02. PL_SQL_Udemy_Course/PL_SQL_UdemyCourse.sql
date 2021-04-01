@@ -142,3 +142,25 @@ BEGIN
 		END LOOP;
 	END LOOP;
 END;
+
+
+-- GOTO statement
+
+DECLARE
+	v_text VARCHAR2(255) := 'I Wrote this message';
+	v_count NUMBER :=1;
+
+BEGIN
+	<<need_to_write>>
+	DBMS_OUTPUT.PUT_LINE(v_text);
+	IF v_count < 5 THEN
+		v_text := v_text || ', again';
+		v_count := v_count + 1;
+		GOTO need_to_write;
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('That was silly');
+	END IF;
+END;
+
+
+
