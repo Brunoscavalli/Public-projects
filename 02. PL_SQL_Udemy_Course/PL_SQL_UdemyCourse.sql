@@ -164,3 +164,120 @@ END;
 
 
 
+/******************************
+        Section 6 - Using SQL in PL/SQL
+******************************/
+
+
+CREATE TABLE
+	copy_emp1 
+AS (
+			SELECT
+			*
+		FROM
+			hr.employees
+  	 )
+;
+
+-- DML in PL/SQL
+
+CREATE TABLE 
+	employee_copy 
+AS (
+	SELECT 
+		* 
+	FROM 
+		hr.employees
+	)
+;
+
+BEGIN
+    FOR i IN 207..216 LOOP
+        INSERT INTO 
+		employee_copy 
+			(
+            		employee_id,
+			first_name, 
+			last_name, 
+			email, 
+			hire_date, 
+			job_id, 
+			salary
+			)
+	VALUES
+        	(
+		i,
+		'employee#'||i,
+		'temp_emp', 
+		'abc@def.com', 
+		sysdate, 
+		'IT_PROG', 
+		1000
+		)
+		;
+    END LOOP;
+END;
+
+-- Sequences
+
+CREATE SEQUENCE 
+    employee_id_seq
+START WITH
+    217
+INCREMENT BY 
+    1
+;
+
+BEGIN
+    FOR i IN 1..12 LOOP
+        INSERT INTO 
+            employee_copy
+                (
+                employee_id,
+                first_name,
+                last_name,
+                email, 
+                hire_date, 
+                job_id, 
+                salary
+            )
+        VALUES
+            (
+            employee_id_seq.nextval, 
+            'employee#'||employee_id_seq.nextval, 
+            'temp_emp', 
+            'abc@def.com', 
+            sysdate, 
+            'IT_PROG', 
+            1000
+            )
+        ;
+    END LOOP;
+END;
+
+SELECT 
+    *
+FROM
+    employee_copy 
+ORDER BY 
+    employee_id DESC
+;
+
+DECLARE
+    v_seq_num NUMBER;
+    v_curr NUMBER;
+BEGIN
+    SELECT 
+        employee_id_seq.nextval 
+    INTO 
+        v_seq_num 
+    FROM
+        dual
+    ;
+    v_curr := employee_id_seq.currval;
+    DBMS_OUTPUT.PUT_LINE(v_seq_num);
+    DBMS_OUTPUT.PUT_LINE(v_curr);
+END
+;
+ 
+
