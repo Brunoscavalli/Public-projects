@@ -1,0 +1,105 @@
+INSERT INTO Tabela_final -- ▬▬▬▬▬▬▬ a1 - b1 d1 ▬▬▬▬▬▬▬
+SEL
+t1.*
+, col1 || '_' || col2 || '_' || c || '_b1_' || 'c1'
+FROM tabela_inicial t1
+WHERE col3 = 'a1'
+AND col6 = 'c1'
+AND col7 = 'd1'
+AND col4 <> 1
+SAMPLE e1
+;
+INSERT INTO Tabela_final -- ▬▬▬▬▬▬▬ semente a1 - b1 d1 ▬▬▬▬▬▬▬
+SEL
+t1.*
+, col1 || '_' || col2 || '_' || col3 || '_b1_' || 'c1'
+FROM tabela_inicial t1
+WHERE col3 = 'a1
+AND col6 = 'c1
+AND col7 = 'd1'
+AND col4 = 1
+;
+DEL 
+FROM tabela_inicial
+WHERE col3 = 'a1'
+AND col4 <> 1
+AND col5 IN ( SEL col5 FROM Tabela_final )
+;
+
+
+INSERT INTO Tabela_final -- ▬▬▬▬▬▬▬ a2 - b2 d2 ▬▬▬▬▬▬▬
+SEL
+t1.*
+, col1 || '_' || col2 || '_' || c || '_b2_' || 'c2'
+FROM tabela_inicial t1
+WHERE col3 = 'a2'
+AND col6 = 'c2'
+AND col7 = 'd2'
+AND col4 <> 1
+SAMPLE e2
+;
+DEL 
+FROM tabela_inicial
+WHERE col3 = 'a2'
+AND col4 <> 1
+AND col5 IN ( SEL col5 FROM Tabela_final )
+;
+
+
+INSERT INTO Tabela_final -- ▬▬▬▬▬▬▬ a3 - b3 d3 ▬▬▬▬▬▬▬
+SEL
+t1.*
+, col1 || '_' || col2 || '_' || c || '_b3_' || 'c3'
+FROM tabela_inicial t1
+WHERE col3 = 'a3'
+AND col6 = 'c3'
+AND col7 = 'd3'
+AND col4 <> 1
+SAMPLE e3
+;
+DEL 
+FROM tabela_inicial
+WHERE col3 = 'a3'
+AND col4 <> 1
+AND col5 IN ( SEL col5 FROM Tabela_final )
+;
+
+
+INSERT INTO Tabela_final -- ▬▬▬▬▬▬▬ a4 - b4 d4 ▬▬▬▬▬▬▬
+SEL
+t1.*
+, col1 || '_' || col2 || '_' || c || '_b4_' || 'c4'
+FROM tabela_inicial t1
+WHERE col3 = 'a4'
+AND col6 = 'c4'
+AND col7 = 'd4'
+AND col4 <> 1
+SAMPLE e4
+;
+DEL 
+FROM tabela_inicial
+WHERE col3 = 'a4'
+AND col4 <> 1
+AND col5 IN ( SEL col5 FROM Tabela_final )
+;
+
+
+INSERT INTO Tabela_final -- ▬▬▬▬▬▬▬ a5 - b5 d5 ▬▬▬▬▬▬▬
+SEL
+t1.*
+, col1 || '_' || col2 || '_' || c || '_b5_' || 'c5'
+FROM tabela_inicial t1
+WHERE col3 = 'a5'
+AND col6 = 'c5'
+AND col7 = 'd5'
+AND col4 <> 1
+SAMPLE e5
+;
+DEL 
+FROM tabela_inicial
+WHERE col3 = 'a5'
+AND col4 <> 1
+AND col5 IN ( SEL col5 FROM Tabela_final )
+;
+
+
